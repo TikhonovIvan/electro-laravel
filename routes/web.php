@@ -15,10 +15,17 @@ Route::get('/checkout', [OrderController::class, 'index'])->name('checkout.index
 Route::get('/store-cart', [OrderController::class, 'storeCart'])->name('store.cart');
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
 
+
+/*регистрация и авторизация*/
 Route::get('/register', [AuthController::class, 'create'])->name('register.create');
 Route::post('/register', [AuthController::class, 'store'])->name('register.store');
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'loginAuth'])->name('login.auth');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::get('/account', [AuthController::class, 'accountForm'])->name('account.form');
+Route::put('/account/{id}', [AuthController::class, 'accountFormUpdate'])->name('account.edit.form');
 
 
 /*Админка*/

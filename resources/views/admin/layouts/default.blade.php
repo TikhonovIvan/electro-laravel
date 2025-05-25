@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css"
           integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous">
     <!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="{{asset('assets/admin/css/adminlte.css')}}"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+    <link rel="stylesheet" href="{{asset('assets/admin/css/adminlte.css')}}"><!--end::Required Plugin(AdminLTE)-->
+    <!-- apexcharts -->
     {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"><!-- jsvectormap -->--}}
     {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous">--}}
 </head> <!--end::Head--> <!--begin::Body-->
@@ -39,30 +40,25 @@
             <ul class="navbar-nav ms-auto"> <!--begin::Navbar Search-->
 
 
-             <!--end::Notifications Dropdown Menu--> <!--begin::Fullscreen Toggle-->
+                <!--end::Notifications Dropdown Menu--> <!--begin::Fullscreen Toggle-->
 
                 <li class="nav-item dropdown user-menu"><a href="#" class="nav-link dropdown-toggle"
                                                            data-bs-toggle="dropdown"> <img
-                            src="{{asset('assets/admin/assets/img/user2-160x160.jpg')}}" class="user-image rounded-circle shadow"
-                            alt="User Image"> <span class="d-none d-md-inline">Alexander Pierce</span> </a>
+                            src="{{asset('assets/admin/assets/img/user2-160x160.jpg')}}"
+                            class="user-image rounded-circle shadow"
+                            alt="User Image"> <span class="d-none d-md-inline">{{auth()->user()->email}}</span> </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
-                        <li class="user-header text-bg-primary"><img src="{{asset('assets/admin/assets/img/user2-160x160.jpg')}}"
-                                                                     class="rounded-circle shadow" alt="User Image">
+                        <li class="user-header text-bg-primary"><img
+                                src="{{asset('assets/admin/assets/img/user2-160x160.jpg')}}"
+                                class="rounded-circle shadow" alt="User Image">
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2023</small>
+                                {{auth()->user()->name}} - {{auth()->user()->surname}}
+                                <small>{{auth()->user()->email}}</small>
                             </p>
-                        </li> <!--end::User Image--> <!--begin::Menu Body-->
-                        <li class="user-body"> <!--begin::Row-->
-                            <div class="row">
-                                <div class="col-4 text-center"><a href="#">Followers</a></div>
-                                <div class="col-4 text-center"><a href="#">Sales</a></div>
-                                <div class="col-4 text-center"><a href="#">Friends</a></div>
-                            </div> <!--end::Row-->
-                        </li> <!--end::Menu Body--> <!--begin::Menu Footer-->
-                        <li class="user-footer"><a href="#" class="btn btn-default btn-flat">Profile</a> <a href="#"
-                                                                                                            class="btn btn-default btn-flat float-end">Sign
-                                out</a></li> <!--end::Menu Footer-->
+                        </li>
+                        <li>
+                            <a href="{{route('logout')}}" class="btn  btn-primary float-end m-2">Выйти</a></li>
+
                     </ul>
                 </li> <!--end::User Menu Dropdown-->
             </ul> <!--end::End Navbar Links-->
@@ -95,7 +91,7 @@
         </div> <!--end::Sidebar Wrapper-->
     </aside>
 
-  @yield('content')
+    @yield('content')
 
     <footer class="app-footer">
         <div class="float-end d-none d-sm-inline">Anything you want</div> <!--end::To the end--> <!--begin::Copyright-->
@@ -116,7 +112,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
-
 
 
 </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- sortablejs -->

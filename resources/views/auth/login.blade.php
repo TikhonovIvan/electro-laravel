@@ -4,13 +4,19 @@
 
 @section('content')
     <div class="container">
+
+
+
         <div class="login-form">
-            <form>
+
+            <form method="post" action="{{route('login.auth')}}">
+                @csrf
+
                 <h2 class="text-center">Добро пожаловать</h2>
                 <div class="wrapper-form-block">
                     <div class="form-input-block">
                         <label> Email</label>
-                        <input type="email" name="email" placeholder="Email" />
+                        <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" />
                     </div>
                     <div class="form-input-block">
                         <label> Пароль</label>
@@ -24,7 +30,7 @@
                     <div class="form-input-block">
                         <p class="text-center mt-5">
                             У меня нет
-                            <a href="register.html"><span>аккаунта!</span> </a>
+                            <a href="{{route('register.create')}}"><span>аккаунта!</span> </a>
                         </p>
                     </div>
                 </div>

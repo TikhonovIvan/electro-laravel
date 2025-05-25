@@ -17,33 +17,53 @@
                 </li>
             </ul>
             <ul class="header-links pull-right">
+
+
                 <li class="d-flex align-items-center">
-                    <a href="#" class="me-4">admin@gmail.com</a>
-                    <i class="fa fa-user-o"></i>
 
-                    <div class="dropdown">
-                        <button
-                            class="btn btn-secondary dropdown-toggle"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            Мой аккаунт
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="{{route('login.form')}}">Вход</a></li>
-                            <li>
-                                <a class="dropdown-item" href="{{route('register.create')}}"
-                                >Регистрация</a
-                                >
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="accaunt.html">Аккаунт</a>
-                            </li>
+                    @auth()
+                        <a href="#" class="me-4">{{auth()->user()->email}}</a>
+                        <i class="fa fa-user-o"></i>
+                    @endauth
 
-                            <li><a class="dropdown-item" href="#">Выход</a></li>
-                        </ul>
-                    </div>
+                        <div class="dropdown">
+                            <button
+                                class="btn btn-secondary dropdown-toggle"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                Мой аккаунт
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+
+
+                                @auth
+                                <li>
+                                    <a class="dropdown-item" href="{{route('account.form')}}">Аккаунт</a>
+                                </li>
+
+                                    @cannot('user')
+                                <li>
+                                    <a class="dropdown-item" href="{{route('admin.main.index')}}">Админ панель</a>
+                                </li>
+                                    @endcannot
+                                <li><a class="dropdown-item" href="{{route('logout')}}">Выход</a></li>
+
+                                @else
+                                    <li><a class="dropdown-item" href="{{route('login.form')}}">Вход</a></li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{route('register.create')}}"
+                                        >Регистрация</a
+                                        >
+                                    </li>
+                                @endauth
+                            </ul>
+                        </div>
+
+
+
+
                 </li>
             </ul>
         </div>
@@ -160,3 +180,31 @@
     </div>
 </nav>
 <!-- /NAVIGATION -->
+
+
+
+<div class="container mt-5  ">
+    <div class="row d-flex justify-content-center">
+        <div class="col-6 text-center">
+
+
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible  show" role="alert">
+                    <ul class="list-unstyled">
+                        @foreach ($errors->all() as $error)
+                            <li> <strong>{{ $error }}</strong> </li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible  show" role="alert">
+                    <strong>{{session('success')}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
+    </div>
+</div>

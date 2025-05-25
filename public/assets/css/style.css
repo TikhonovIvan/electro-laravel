@@ -78,6 +78,11 @@ ol {
   background-color: #fff;
   width: 100%;
 }
+.form-control{
+    font-size: 14px;
+}
+
+
 
 textarea.input {
   padding: 15px;
