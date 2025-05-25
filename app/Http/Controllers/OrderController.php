@@ -14,6 +14,12 @@ class OrderController extends Controller
         return view('checkout');
     }
 
+    public function storeCart()
+    {
+        return view('store-cart');
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */

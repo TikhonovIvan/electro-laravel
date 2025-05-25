@@ -116,7 +116,7 @@
 
                                 <!-- Кнопки управления -->
                                 <div class="cart-btns">
-                                    <a href="corzina.html">Посмотреть корзину</a>
+                                    <a href="{{route('store.cart')}}">Посмотреть корзину</a>
                                     <a href="{{route('checkout.index')}}">
                                         Оформить <i class="fa fa-arrow-circle-right"></i>
                                     </a>

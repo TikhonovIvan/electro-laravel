@@ -54,7 +54,7 @@
                                     </button>
 
                                     <button class="quick-view">
-                                        <a href=""><i class="fa fa-eye"></i></a>
+                                        <a href="{{route('product.show', 1)}}"><i class="fa fa-eye"></i></a>
                                         <span class="tooltipp">Посмотреть</span>
                                     </button>
                                 </div>

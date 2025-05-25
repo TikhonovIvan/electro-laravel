@@ -110,7 +110,7 @@
 <script src=" {{ asset('assets/js/jquery.min.js') }} "></script>
 <!-- <script src="js/bootstrap.min.js"></script> -->
 <script src=" {{ asset('assets/js/slick.min.js') }} "></script>
-<!-- <script src="js/nouislider.min.js"></script> -->
+<script src="{{ asset('assets/js/nouislider.min.js') }}"></script>
 <script src=" {{ asset('assets/js/jquery.zoom.min.js') }}"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
