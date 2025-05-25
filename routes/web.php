@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
@@ -17,3 +19,9 @@ Route::get('/register', [AuthController::class, 'create'])->name('register.creat
 Route::post('/register', [AuthController::class, 'store'])->name('register.store');
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'loginAuth'])->name('login.auth');
+
+
+/*Админка*/
+
+Route::get('/admin', [MainController::class, 'index'])->name('admin.main.index');
+Route::get('/admin/category', [AdminCategoryController::class, 'index'])->name('admin.category.index');
