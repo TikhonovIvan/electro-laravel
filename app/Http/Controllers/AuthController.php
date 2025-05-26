@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
@@ -14,7 +15,10 @@ class AuthController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::query()->paginate(5);
+        return view('admin.users.index',[
+            'users' => $users
+        ]);
     }
 
   /*Форма регистрации пользователя */
@@ -123,7 +127,10 @@ class AuthController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.users.edit',[
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -131,7 +138,31 @@ class AuthController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $validated = $request->validate([
+            'name' => ['required'],
+            'surname' => ['required'],
+            'address' => ['required'],
+            'city' => ['required'],
+            'phone' => ['required'],
+            'postal_code' => ['required'],
+            'email' => ['required', 'email',  Rule::unique('users')->ignore($user->id)],
+            'password' => [],
+        ]);
+
+        // Хэшируем пароль перед обновлением
+        if (!empty($validated['password'])) {
+            $validated['password'] = Hash::make($validated['password']);
+        } else {
+            unset($validated['password']);
+        }
+        if (  $user->update($validated)){
+            return redirect()
+                ->route('admin.user.edit', ['id' => $user->id])
+                ->with('success', 'Данные пользователя обновлены');
+        }
+
+        return back()->with('error', 'Проверьте поля')->withInput();
     }
 
     /**

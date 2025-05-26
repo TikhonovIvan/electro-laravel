@@ -25,9 +25,11 @@ Route::post('/login', [AuthController::class, 'loginAuth'])->name('login.auth');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 /*регистрация и авторизация End */
 
+
+/*Кабинет пользователей в магазине GRUD */
 Route::get('/account', [AuthController::class, 'accountForm'])->name('account.form');
 Route::put('/account/{id}', [AuthController::class, 'accountFormUpdate'])->name('account.edit.form');
-
+/*Кабинет пользователей в магазине GRUD end*/
 
 
 
@@ -48,3 +50,9 @@ Route::delete('/admin/category/{id}', [AdminCategoryController::class, 'destroy'
 /*Создание категории GRUD End*/
 
 
+/*Пользователи системы кабинет админа GRUD*/
+Route::get('/admin/users', [AuthController::class, 'index'])->name('admin.users.index');
+Route::get('/admin/user/{id}/edit', [AuthController::class, 'edit'])->name('admin.user.edit');
+Route::put('/admin/user/{id}', [AuthController::class, 'update'])->name('admin.user.update');
+Route::delete('/admin/user/{id}', [AuthController::class, 'destroy'])->name('admin.user.destroy');
+/*Пользователи системы кабинет админа GRUD End*/

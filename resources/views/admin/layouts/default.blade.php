@@ -190,7 +190,7 @@
                             <p>Главная</p>
                         </a>
                     </li>
-                    <li class="nav-item"><a href="{{route('admin.main.index')}}" class="nav-link">
+                    <li class="nav-item"><a href="{{route('admin.users.index')}}" class="nav-link">
                             <i class="nav-icon bi bi-people"></i>
                             <p>Пользователи</p>
                         </a>
