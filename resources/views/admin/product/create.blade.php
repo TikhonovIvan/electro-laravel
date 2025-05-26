@@ -28,7 +28,7 @@
                     <div class="card-header">
                         <div class="card-title">Добавить новый товар</div>
                     </div>
-                    <form class="needs-validation" method="post" action="" enctype="multipart/form-data">
+                    <form class="needs-validation" method="post" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="row g-3">
@@ -62,7 +62,7 @@
                                     <label for="validationCustom04" class="form-label">Цвет товара</label>
                                     <select class="form-select" id="validationCustom04" required="" name="color">
                                         <option selected="" disabled=""  >Выберите цвет</option>
-                                        <option value="red">Красный</option>
+                                        <option value="Красный">Красный</option>
                                     </select>
 
                                 </div>
@@ -81,6 +81,8 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+
 
                                 <div class=" mb-3">
                                     <label for="validationCustom04" class="form-label">Фото продукта</label>

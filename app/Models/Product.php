@@ -26,4 +26,13 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+
+    protected static function booted()
+    {
+        static::deleting(function ($product) {
+            // Удалим связанные записи в БД (если не настроено каскадом)
+            $product->images()->delete();
+        });
+    }
 }

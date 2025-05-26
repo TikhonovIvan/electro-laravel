@@ -63,6 +63,9 @@ Route::get('/admin/products', [AdminProductController::class, 'index'])->name('a
 Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
 Route::post('/admin/products/create', [AdminProductController::class, 'store'])->name('admin.products.store');
 Route::get('/admin/products/{id}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+Route::get('/admin/products/{id}', [AdminProductController::class, 'show'])->name('admin.products.show');
 Route::put('/admin/products/{id}', [AdminProductController::class, 'update'])->name('admin.products.update');
 Route::delete('/admin/products/{id}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
+Route::delete('/admin/product/image/{id}', [AdminProductController::class, 'deleteImage'])->name('admin.product.image.delete');
+
 /*Создание товара Склад GRUD end*/

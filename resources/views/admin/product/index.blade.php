@@ -38,7 +38,7 @@
                                 <th>Кол-во на складе</th>
                                 <th>Категория</th>
 
-                                <th style="width: 150px">Действие</th>
+                                <th style="width: 160px">Действие</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -54,12 +54,13 @@
                                     <td>{{$product->stock}}</td>
                                     <td>{{$product->category->name}}</td>
                                     <td class="d-flex gap-2">
-                                        <a href="" class="btn btn-primary"><i
+                                        <a href="{{ route('admin.products.edit', $product->id ) }}" class="btn btn-success"><i
                                                 class="bi bi-pencil"></i></a>
 
-                                        <a href="" class="btn btn-primary"><i
-                                                class="bi bi-pencil"></i></a>
-                                        <form action="" method="post">
+                                        <a href="{{ route('admin.products.show', $product->id ) }}" class="btn btn-primary">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                        <form action="{{ route('admin.products.destroy', $product->id ) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger"
