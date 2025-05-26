@@ -187,7 +187,6 @@
     <div class="row d-flex justify-content-center">
         <div class="col-6 text-center">
 
-
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible  show" role="alert">
                     <ul class="list-unstyled">

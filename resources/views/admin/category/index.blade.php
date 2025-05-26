@@ -3,52 +3,75 @@
 
 @section('content')
 
-    <div class="col-6">
-
-        <div class="card mb-4">
-            <h1 class="card-title p-2">Категории</h1><br>
-            <div class="card-header">
-
-                <a href="#" class="btn btn-primary mt-3">Добавить</a>
-            </div> <!-- /.card-header -->
-            <div class="card-body">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th style="width: 10px">#</th>
-                        <th>Название</th>
-
-                        <th style="width: 100px"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="align-middle">
-                        <td>1.</td>
-                        <td>Ноутбуки</td>
-                        <td class="d-flex gap-2"><a href="" class="btn btn-info"><i class="bi bi-pencil "></i></a>
-                            <a href="" class="btn btn-danger" ><i class="bi bi-trash"></i></a></td>
-                    </tr>
-                    <tr class="align-middle">
-                        <td>1.</td>
-                        <td>Ноутбуки</td>
-                        <td class="d-flex gap-2"><a href="" class="btn btn-info"><i class="bi bi-pencil "></i></a>
-                            <a href="" class="btn btn-danger" ><i class="bi bi-trash"></i></a></td>
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div> <!-- /.card-body -->
-            <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-end">
-                    <li class="page-item"> <a class="page-link" href="#">&laquo;</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">2</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">&raquo;</a> </li>
-                </ul>
+        <div class="app-content-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3 class="mb-0">Категории</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-end">
+                            <li class="breadcrumb-item"><a href="{{route('admin.main.index')}}">Главная</a></li>
+                            <li class="breadcrumb-item">Категория</li>
+                        </ol>
+                    </div>
+                </div>
             </div>
-        </div> <!-- /.card -->
+        </div>
 
-    </div>
+        <div class="app-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <a href="{{route('admin.category.create')}}" class="btn btn-primary  px-5 ">Добавить</a>
+                        </div> <!-- /.card-header -->
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Название</th>
+
+                                    <th style="width: 150px">Действие</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($categories as $category)
+
+
+                                <tr class="align-middle">
+                                    <td>{{$category->id}}</td>
+                                    <td>{{$category->name}}</td>
+                                    <td class="d-flex gap-2">
+                                        <a href="{{route('admin.category.edit', $category->id)}}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
+
+                                        <form action="{{ route('admin.category.destroy', $category->id) }}" method="post">
+                                        @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить категорию?')">
+                                                <i class="bi bi-trash3-fill"></i>
+                                            </button>
+                                        </form>
+
+                                    </td>
+                                </tr>
+                                @endforeach
+
+
+                                </tbody>
+                            </table>
+                            <div class="mt-3">
+                                {{ $categories->links() }}
+                            </div>
+
+                        </div> <!-- /.card-body -->
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 @endsection

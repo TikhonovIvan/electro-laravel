@@ -30,5 +30,13 @@ Route::put('/account/{id}', [AuthController::class, 'accountFormUpdate'])->name(
 
 /*Админка*/
 
+/*главная страница*/
 Route::get('/admin', [MainController::class, 'index'])->name('admin.main.index');
+
+/*Создание категории GRUD*/
 Route::get('/admin/category', [AdminCategoryController::class, 'index'])->name('admin.category.index');
+Route::get('/admin/category/create', [AdminCategoryController::class, 'create'])->name('admin.category.create');
+Route::post('/admin/category/create', [AdminCategoryController::class, 'store'])->name('admin.category.store');
+Route::get('/admin/category/{id}', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
+Route::put('/admin/category/{id}', [AdminCategoryController::class, 'update'])->name('admin.category.update');
+Route::delete('/admin/category/{id}', [AdminCategoryController::class, 'destroy'])->name('admin.category.destroy');
