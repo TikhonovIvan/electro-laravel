@@ -180,21 +180,38 @@
             <nav class="mt-2"> <!--begin::Sidebar Menu-->
                 <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
 
+                    <li class="nav-item"><a href="{{route('home')}}" class="nav-link">
+                            <i class="nav-icon bi bi-shop"></i>
+                            <p>В магазина </p>
+                        </a>
+                    </li>
                     <li class="nav-item"><a href="{{route('admin.main.index')}}" class="nav-link">
                             <i class=" nav-icon bi bi-house-check"></i>
                             <p>Главная</p>
                         </a>
                     </li>
+                    <li class="nav-item"><a href="{{route('admin.main.index')}}" class="nav-link">
+                            <i class="nav-icon bi bi-people"></i>
+                            <p>Пользователи</p>
+                        </a>
+                    </li>
+
 
                     <li class="nav-item"><a href="{{route('admin.category.index')}}" class="nav-link">
                             <i class=" nav-icon bi bi-card-list"></i>
-                            <p>Категория</p>
+                            <p>Категории</p>
                         </a>
                     </li>
 
                     <li class="nav-item"><a href="{{route('admin.category.index')}}" class="nav-link">
                             <i class="nav-icon bi bi-cart-plus"></i>
                             <p>Склад</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item"><a href="" class="nav-link">
+                            <i class=" nav-icon bi bi-bag-check"></i>
+                            <p>Заказы</p>
                         </a>
                     </li>
 
