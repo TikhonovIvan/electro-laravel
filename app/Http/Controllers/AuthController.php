@@ -170,6 +170,8 @@ class AuthController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::query()->findOrFail($id);
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('success', 'Пользователь удален');
     }
 }

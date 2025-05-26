@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
@@ -39,12 +40,11 @@ Route::put('/account/{id}', [AuthController::class, 'accountFormUpdate'])->name(
 Route::get('/admin', [MainController::class, 'index'])->name('admin.main.index');
 
 
-
 /*Создание категории GRUD*/
 Route::get('/admin/category', [AdminCategoryController::class, 'index'])->name('admin.category.index');
 Route::get('/admin/category/create', [AdminCategoryController::class, 'create'])->name('admin.category.create');
 Route::post('/admin/category/create', [AdminCategoryController::class, 'store'])->name('admin.category.store');
-Route::get('/admin/category/{id}', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
+Route::get('/admin/category/{id}/edit', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
 Route::put('/admin/category/{id}', [AdminCategoryController::class, 'update'])->name('admin.category.update');
 Route::delete('/admin/category/{id}', [AdminCategoryController::class, 'destroy'])->name('admin.category.destroy');
 /*Создание категории GRUD End*/
@@ -56,3 +56,13 @@ Route::get('/admin/user/{id}/edit', [AuthController::class, 'edit'])->name('admi
 Route::put('/admin/user/{id}', [AuthController::class, 'update'])->name('admin.user.update');
 Route::delete('/admin/user/{id}', [AuthController::class, 'destroy'])->name('admin.user.destroy');
 /*Пользователи системы кабинет админа GRUD End*/
+
+
+/*Создание товара Склад GRUD*/
+Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products.index');
+Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
+Route::post('/admin/products/create', [AdminProductController::class, 'store'])->name('admin.products.store');
+Route::get('/admin/products/{id}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+Route::put('/admin/products/{id}', [AdminProductController::class, 'update'])->name('admin.products.update');
+Route::delete('/admin/products/{id}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
+/*Создание товара Склад GRUD end*/

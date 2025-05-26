@@ -32,6 +32,8 @@
                                 <tr>
                                     <th style="width: 10px">#</th>
                                     <th>Название</th>
+                                    <th>Описание</th>
+                                    <th>Уникально название</th>
 
                                     <th style="width: 150px">Действие</th>
                                 </tr>
@@ -43,6 +45,8 @@
                                 <tr class="align-middle">
                                     <td>{{$category->id}}</td>
                                     <td>{{$category->name}}</td>
+                                    <td>{{$category->description}}</td>
+                                    <td>{{$category->slug}}</td>
                                     <td class="d-flex gap-2">
                                         <a href="{{route('admin.category.edit', $category->id)}}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
 
