@@ -11,18 +11,23 @@
     <div class="container">
         <!-- row -->
         <div class="row">
+            <form action="" method="post">
             <div class="col-md-7">
                 <!-- Billing Details -->
                 <div class="billing-details">
                     <div class="section-title">
                         <h3 class="title">Адрес для выставления счета</h3>
                     </div>
+
+
+
                     <div class="form-group">
                         <input
                             class="input"
                             type="text"
                             name="first-name"
                             placeholder="Имя"
+                            value="{{$user->name}}"
                         />
                     </div>
                     <div class="form-group">
@@ -31,6 +36,7 @@
                             type="text"
                             name="last-name"
                             placeholder="Фамилия"
+                            value="{{$user->surname}}"
                         />
                     </div>
                     <div class="form-group">
@@ -39,6 +45,7 @@
                             type="email"
                             name="email"
                             placeholder="Email"
+                            value="{{$user->email}}"
                         />
                     </div>
                     <div class="form-group">
@@ -47,6 +54,7 @@
                             type="text"
                             name="address"
                             placeholder="Адрес"
+                            value="{{$user->address}}"
                         />
                     </div>
                     <div class="form-group">
@@ -55,6 +63,8 @@
                             type="text"
                             name="city"
                             placeholder="Город"
+                            value="{{$user->city}}"
+
                         />
                     </div>
 
@@ -62,16 +72,18 @@
                         <input
                             class="input"
                             type="text"
-                            name="zip-code"
+                            name="postal_code"
                             placeholder="Почтовый индекс"
+                            value="{{$user->postal_code}}"
                         />
                     </div>
                     <div class="form-group">
                         <input
                             class="input"
                             type="tel"
-                            name="tel"
+                            name="phone"
                             placeholder="Телефон"
+                            value="{{$user->phone}}"
                         />
                     </div>
                     <div class="form-group">
@@ -100,6 +112,7 @@
                 <textarea
                     class="input"
                     placeholder="Описание к заказу"
+                    name="desc"
                 ></textarea>
                 </div>
                 <!-- /Order notes -->
@@ -178,6 +191,8 @@
                 <a href="#" class="primary-btn order-submit">Разместить заказ</a>
             </div>
             <!-- /Order Details -->
+
+            </form>
         </div>
         <!-- /row -->
     </div>

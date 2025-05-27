@@ -10,9 +10,9 @@ class AdminCategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::query()->paginate(5);
+        $allCategories = Category::query()->paginate(5);
         return view('admin.category.index', [
-            'categories' => $categories
+            'allCategories' => $allCategories
         ]);
     }
 

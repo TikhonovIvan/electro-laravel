@@ -20,7 +20,7 @@
             <tr></tr>
             </tbody>
         </table>
-        <a href="{{route('checkout.index')}}" class="">Перейти к формлению</a>
+        <a href="{{route('checkout.index')}}" class="btn btn-danger fs-3 px-4 rounded-5">Перейти к формлению</a>
     </div>
 
 @endsection

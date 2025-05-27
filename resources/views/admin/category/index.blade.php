@@ -39,7 +39,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($categories as $category)
+                                @foreach($allCategories as $category)
 
 
                                 <tr class="align-middle">
@@ -66,7 +66,7 @@
                                 </tbody>
                             </table>
                             <div class="mt-3">
-                                {{ $categories->links() }}
+                                {{ $allCategories->links() }}
                             </div>
 
                         </div> <!-- /.card-body -->
