@@ -97,10 +97,26 @@ class AdminProductController extends Controller
         ]);
     }
 
+    public function deleteImage($id)
+    {
+        $image = ProductImage::query()->findOrFail($id);
+
+        // Удаляем файл из файловой системы
+        $imagePath = public_path('uploads/' . $image->image_path);
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
+
+        // Удаляем только изображение
+        $image->delete();
+
+        return back()->with('success', 'Изображение удалено');
+    }
 
 
     public function update(Request $request, string $id)
     {
+
         $product = Product::with('images')->findOrFail($id);
 
         $validated = $request->validate([
@@ -139,22 +155,10 @@ class AdminProductController extends Controller
     }
 
 
-    /*У*/
-    public function deleteImage($id)
-    {
-        $image = ProductImage::findOrFail($id);
 
-        // Удаляем файл из файловой системы
-        $imagePath = public_path('uploads/' . $image->image_path);
-        if (File::exists($imagePath)) {
-            File::delete($imagePath);
-        }
 
-        // Удаляем запись из базы данных
-        $image->delete();
 
-        return back()->with('success', 'Изображение удалено');
-    }
+
 
 
     /**

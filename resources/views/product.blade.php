@@ -13,21 +13,16 @@
             <!-- Product main img -->
             <div class="col-md-5 col-md-push-2">
                 <div id="product-main-img">
-                    <div class="product-preview">
-                        <img src="{{asset('assets/img/product01.png')}}" alt="" />
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="{{asset('assets/img/product03.png')}}" alt="" />
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="{{asset('assets/img/product06.png')}}" alt="" />
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="{{asset('assets/img/product08.png')}}" alt="" />
-                    </div>
+                    @foreach($product->images as $image)
+                        <div class="product-preview">
+                            <img src="{{ asset('uploads/' . $image->image_path) }}" alt="{{ $product->name }}" />
+                        </div>
+                    @endforeach
+                    @if($product->images->isEmpty())
+                        <div class="product-preview">
+                            <img src="{{ asset('img/no-image.png') }}" alt="Нет изображения" />
+                        </div>
+                    @endif
                 </div>
             </div>
             <!-- /Product main img -->
@@ -35,21 +30,16 @@
             <!-- Product thumb imgs -->
             <div class="col-md-2 col-md-pull-5">
                 <div id="product-imgs">
-                    <div class="product-preview">
-                        <img src="{{asset('assets/img/product01.png')}}" alt="" />
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="{{asset('assets/img/product03.png')}}" alt="" />
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="{{asset('assets/img/product06.png')}}" alt="" />
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="{{asset('assets/img/product08.png')}}" alt="" />
-                    </div>
+                    @foreach($product->images as $image)
+                        <div class="product-preview">
+                            <img src="{{ asset('uploads/' . $image->image_path) }}" alt="{{ $product->name }}" />
+                        </div>
+                    @endforeach
+                    @if($product->images->isEmpty())
+                        <div class="product-preview">
+                            <img src="{{ asset('img/no-image.png') }}" alt="Нет изображения" />
+                        </div>
+                    @endif
                 </div>
             </div>
             <!-- /Product thumb imgs -->
@@ -57,19 +47,16 @@
             <!-- Product details -->
             <div class="col-md-5">
                 <div class="product-details">
-                    <h2 class="product-name">Ноутбук Asus A15</h2>
+                    <h2 class="product-name">{{$product->name}}</h2>
 
                     <div>
                         <h3 class="product-price">
-                            980.00 сом <del class="product-old-price">990.00 сом</del>
+                            {{ $product->price - $product->discount }} сом <del class="product-old-price">{{$product->price }} сом</del>
                         </h3>
-                        <span class="product-available">В наличии</span>
+                        <span class="product-available">В наличии {{$product->stock}} шт.</span>
                     </div>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.
+                        {{$product->short_description}}
                     </p>
 
                     <div class="product-options">
@@ -92,10 +79,11 @@
                         </div>
                         <button
                             class="add-to-cart-btn"
-                            data-id="1"
-                            data-name="Ноутбук Asus A15"
-                            data-price="98000"
-                            data-img="./img/product01.png"
+                            data-id="{{ $product->id }}"
+                            data-name="{{ $product->name }}"
+                            data-price="{{ $product->price - $product->discount }}"
+                            data-img="{{ $product->images->first() ? asset('uploads/' . $product->images->first()->image_path) : asset('img/no-image.png') }}"
+
                         >
                             <i class="fa fa-shopping-cart"></i> Добавить в корзинку
                         </button>
@@ -133,7 +121,7 @@
                         <li class="active">
                             <a data-toggle="tab" href="#tab1">Описание</a>
                         </li>
-                        <li><a data-toggle="tab" href="#tab2">Детали</a></li>
+
                     </ul>
                     <!-- /product tab nav -->
 
@@ -144,40 +132,14 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <p>
-                                        321 Lorem ipsum dolor sit amet, consectetur
-                                        adipisicing elit, sed do eiusmod tempor incididunt ut
-                                        labore et dolore magna aliqua. Ut enim ad minim
-                                        veniam, quis nostrud exercitation ullamco laboris nisi
-                                        ut aliquip ex ea commodo consequat. Duis aute irure
-                                        dolor in reprehenderit in voluptate velit esse cillum
-                                        dolore eu fugiat nulla pariatur. Excepteur sint
-                                        occaecat cupidatat non proident, sunt in culpa qui
-                                        officia deserunt mollit anim id est laborum.
+                                        {!! $product->long_description !!}
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <!-- /tab1  -->
 
-                        <!-- tab2  -->
-                        <div id="tab2" class="tab-pane fade in">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>
-                                        123 Lorem ipsum dolor sit amet, consectetur
-                                        adipisicing elit, sed do eiusmod tempor incididunt ut
-                                        labore et dolore magna aliqua. Ut enim ad minim
-                                        veniam, quis nostrud exercitation ullamco laboris nisi
-                                        ut aliquip ex ea commodo consequat. Duis aute irure
-                                        dolor in reprehenderit in voluptate velit esse cillum
-                                        dolore eu fugiat nulla pariatur. Excepteur sint
-                                        occaecat cupidatat non proident, sunt in culpa qui
-                                        officia deserunt mollit anim id est laborum.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /tab2  -->
+
                     </div>
                     <!-- /product tab content  -->
                 </div>
@@ -190,7 +152,7 @@
 </div>
 <!-- /SECTION -->
 
-{{-- Карточки товаров --}}
-@include('layouts.product-card.product-card')
+
+
 
 @endsection

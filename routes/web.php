@@ -11,10 +11,18 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*Страницы интернет магазина*/
+/*Главная страница*/
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/product/{id}', [ProductController::class, 'index'])->name('product.show');
+
+/*Страница одного продукта*/
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
 Route::get('/checkout', [OrderController::class, 'index'])->name('checkout.index');
+
+/*Страница корзины продукта*/
 Route::get('/store-cart', [OrderController::class, 'storeCart'])->name('store.cart');
+
+/*Страница всех категорий*/
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
 
 
@@ -62,10 +70,15 @@ Route::delete('/admin/user/{id}', [AuthController::class, 'destroy'])->name('adm
 Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products.index');
 Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
 Route::post('/admin/products/create', [AdminProductController::class, 'store'])->name('admin.products.store');
-Route::get('/admin/products/{id}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
 Route::get('/admin/products/{id}', [AdminProductController::class, 'show'])->name('admin.products.show');
+Route::get('/admin/products/{id}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
 Route::put('/admin/products/{id}', [AdminProductController::class, 'update'])->name('admin.products.update');
-Route::delete('/admin/products/{id}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
 Route::delete('/admin/product/image/{id}', [AdminProductController::class, 'deleteImage'])->name('admin.product.image.delete');
 
+Route::delete('/admin/products/{id}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
+
 /*Создание товара Склад GRUD end*/
+
+
+
+

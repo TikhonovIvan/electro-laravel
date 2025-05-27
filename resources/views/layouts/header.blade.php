@@ -3,7 +3,7 @@
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
-            <ul class="header-links pull-left">
+            <ul class="header-links pull-left text-center ">
                 <li>
                     <a href="#"><i class="fa fa-phone"></i> +996 555-00-00-00</a>
                 </li>
@@ -16,10 +16,10 @@
                     >
                 </li>
             </ul>
-            <ul class="header-links pull-right">
+            <ul class="header-links pull-right text-center ">
 
 
-                <li class="d-flex align-items-center">
+                <li class="d-flex align-items-center flex-wrap  justify-content-center gap-2 ">
 
                     @auth()
                         <a href="#" class="me-4">{{auth()->user()->email}}</a>
@@ -60,10 +60,6 @@
                                 @endauth
                             </ul>
                         </div>
-
-
-
-
                 </li>
             </ul>
         </div>
@@ -169,12 +165,15 @@
     <div class="container">
         <div id="responsive-nav">
             <ul class="main-nav nav">
-                <li><a href="{{ route( 'home') }}">Главная</a></li>
-                <li><a href="{{ route( 'category.index') }}">Категории</a></li>
-                <li><a href="#">Ноутбуки</a></li>
-                <li><a href="#">Смартфоны</a></li>
-                <li><a href="#">Камеры</a></li>
-                <li><a href="#">Аксесуары</a></li>
+                <ul class="main-nav nav">
+                    <li><a href="{{ route('home') }}">Главная</a></li>
+                    <li><a href="{{ route('category.index') }}">Категории</a></li>
+                    @foreach($categories as $category)
+                        <li><a href="">{{ $category->name }}</a></li>
+                    @endforeach
+
+                </ul>
+
             </ul>
         </div>
     </div>

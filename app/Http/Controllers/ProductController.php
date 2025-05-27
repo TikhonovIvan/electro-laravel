@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -11,7 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product');
+
+
     }
 
     /**
@@ -35,6 +38,13 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
+        $products = Product::with(['category', 'images'])->findOrFail($id);
+
+        return view('product', [
+            'product' => $products,
+        ]);
+
+
 
     }
 

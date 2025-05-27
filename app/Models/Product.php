@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
@@ -22,17 +23,16 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
-    public function category()
+    public function category() :BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
 
-    protected static function booted()
+    protected static function booted(): void
     {
         static::deleting(function ($product) {
-            // Удалим связанные записи в БД (если не настроено каскадом)
-            $product->images()->delete();
+            $product->images()->delete(); // ← нормально
         });
     }
 }

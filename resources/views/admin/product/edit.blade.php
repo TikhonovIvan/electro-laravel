@@ -28,6 +28,25 @@
                     <div class="card-header">
                         <div class="card-title">Отредактировать товар</div>
                     </div>
+                    @if ($product->images->count())
+                        <div class="mb-3">
+                            <label class="form-label">Текущие изображения</label>
+                            <div class="row">
+                                @foreach ($product->images as $image)
+                                    <div class="col-md-3 mb-3 text-center">
+                                        <img src="{{ asset('uploads/' . $image->image_path) }}" style="width: 300px;" class="img-thumbnail mb-2">
+
+                                        <form action="{{ route('admin.product.image.delete', $image->id) }}" method="POST" onsubmit="return confirm('Удалить это изображение?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+                                        </form>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
                     <form class="needs-validation" method="post" action="{{ route('admin.products.update', $product->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -59,13 +78,14 @@
                                     <input type="text" name="discount" class="form-control" id="validationCustom03"
                                            required=""  value="{{ $product->discount }}">
                                 </div>
+
                                 <div class="col-md-6">
                                     <label for="validationCustom04" class="form-label">Цвет товара</label>
-                                    <select class="form-select" id="validationCustom04" required="" name="color">
-                                        <option selected="" disabled=""  >Выберите цвет</option>
-                                        <option value="Красный">{{ $product->color }}</option>
+                                    <select class="form-select" id="validationCustom04" required name="color">
+                                        <option disabled {{ $product->color ? '' : 'selected' }}>Выберите цвет</option>
+                                        <option value="Синий" {{ $product->color === 'Синий' ? 'selected' : '' }}>Синий</option>
+                                        <option value="Красный" {{ $product->color === 'Красный' ? 'selected' : '' }}>Красный</option>
                                     </select>
-
                                 </div>
                                 <div class="col-md-6">
                                     <label for="validationCustom05" class="form-label">Кол-во на складе</label>
@@ -86,24 +106,7 @@
                                     </select>
                                 </div>
 
-                                @if ($product->images->count())
-                                    <div class="mb-3">
-                                        <label class="form-label">Текущие изображения</label>
-                                        <div class="row">
-                                            @foreach ($product->images as $image)
-                                                <div class="col-md-3 mb-3 text-center">
-                                                    <img src="{{ asset('uploads/' . $image->image_path) }}" style="width: 300px;" class="img-thumbnail mb-2">
 
-                                                    <form action="{{ route('admin.product.image.delete', $image->id) }}" method="POST" onsubmit="return confirm('Удалить это изображение?')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-sm btn-danger">Удалить</button>
-                                                    </form>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                @endif
 
 
 
@@ -131,37 +134,15 @@
                         <div class="card-footer">
                             <button class="btn btn-warning" type="submit">Редактировать</button>
                         </div>
+
                     </form>
-                    <script>
-                        // Example starter JavaScript for disabling form submissions if there are invalid fields
-                        (() => {
-                            "use strict";
 
-                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                            const forms =
-                                document.querySelectorAll(".needs-validation");
 
-                            // Loop over them and prevent submission
-                            Array.from(forms).forEach((form) => {
-                                form.addEventListener(
-                                    "submit",
-                                    (event) => {
-                                        if (!form.checkValidity()) {
-                                            event.preventDefault();
-                                            event.stopPropagation();
-                                        }
-
-                                        form.classList.add("was-validated");
-                                    },
-                                    false
-                                );
-                            });
-                        })();
-                    </script>
                 </div>
 
             </div>
         </div>
     </div>
+
 
 @endsection
