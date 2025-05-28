@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 
 class AdminOrderController extends Controller
@@ -40,7 +41,11 @@ class AdminOrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $order = Order::with('items')->findOrFail($id);
+
+        return view('admin.order.show', [
+            'order' => $order
+        ]);
     }
 
     /**
@@ -49,6 +54,7 @@ class AdminOrderController extends Controller
     public function edit(string $id)
     {
         $order = Order::query()->findOrFail($id);
+
         return view('admin.order.edit',[
             'order' => $order
         ]);
@@ -76,6 +82,8 @@ class AdminOrderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $order = Order::query()->findOrFail($id);
+        $order->delete();
+        return redirect()->back()->with('success', 'Заказ успешно удален.');
     }
 }

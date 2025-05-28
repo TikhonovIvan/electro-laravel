@@ -67,13 +67,13 @@
                                         <a href="{{ route('admin.order.edit', $order->id) }}" class="btn btn-success"><i
                                                 class="bi bi-pencil"></i></a>
 
-                                        <a href="" class="btn btn-primary">
+                                        <a href="{{ route('admin.order.show', $order->id) }}" class="btn btn-primary">
                                             <i class="bi bi-eye-fill"></i>
                                         </a>
                                         <a href="" class="btn btn-warning">
                                             <i class="bi bi-printer"></i>
                                         </a>
-                                        <form action="" method="post">
+                                        <form action="{{ route('admin.order.destroy', $order->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger"

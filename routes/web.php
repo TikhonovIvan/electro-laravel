@@ -90,8 +90,10 @@ Route::delete('/admin/products/{id}', [AdminProductController::class, 'destroy']
 /*Заказы клиентов GRUD*/
 
 Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+Route::get('/admin/orders/{id}', [AdminOrderController::class, 'show'])->name('admin.order.show');
 Route::get('/admin/orders/{id}/edit', [AdminOrderController::class, 'edit'])->name('admin.order.edit');
 Route::put('/admin/orders/{order}', [AdminOrderController::class, 'update'])->name('admin.order.update');
+Route::delete('/admin/orders/{id}', [AdminOrderController::class, 'destroy'])->name('admin.order.destroy');
 /*Заказы клиентов GRUD end*/
 
 
