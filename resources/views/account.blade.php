@@ -66,7 +66,7 @@
 
             </div>
 
-            <div class="block-cards-z">
+            <div class="block-cards-z p-3">
                 <h2 class="text-center mb-5">Мои заказы</h2>
                 <div class="cards-z">
 

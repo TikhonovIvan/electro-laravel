@@ -560,6 +560,15 @@ textarea.input {
   border: 1px solid #fff;
 }
 
+@media (max-width: 768px) {
+    .cart-dropdown {
+
+
+        right: -155px;
+
+    }
+}
+
 .dropdown.open > .cart-dropdown {
   opacity: 1;
   visibility: visible;
@@ -2411,7 +2420,7 @@ footer {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    align-items: center;
+
 
 }
 
