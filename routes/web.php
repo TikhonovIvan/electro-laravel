@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\AuthController;
@@ -43,6 +44,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 /*Кабинет пользователей в магазине GRUD */
 Route::get('/account', [AuthController::class, 'accountForm'])->name('account.form');
 Route::put('/account/{id}', [AuthController::class, 'accountFormUpdate'])->name('account.edit.form');
+Route::delete('/account/{form}', [AuthController::class, 'accountFormDelete'])->name('account.delete.form');
 /*Кабинет пользователей в магазине GRUD end*/
 
 
@@ -84,6 +86,13 @@ Route::delete('/admin/products/{id}', [AdminProductController::class, 'destroy']
 
 /*Создание товара Склад GRUD end*/
 
+
+/*Заказы клиентов GRUD*/
+
+Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+Route::get('/admin/orders/{id}/edit', [AdminOrderController::class, 'edit'])->name('admin.order.edit');
+Route::put('/admin/orders/{order}', [AdminOrderController::class, 'update'])->name('admin.order.update');
+/*Заказы клиентов GRUD end*/
 
 
 

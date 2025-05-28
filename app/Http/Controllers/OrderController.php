@@ -60,10 +60,13 @@ class OrderController extends Controller
             $total = collect($cartItems)->sum(function ($item) {
                 return $item['price'] * $item['qty'];
             });
+            $lastOrder = Order::orderBy('id', 'desc')->lockForUpdate()->first();
+            $nextOrderNumber = $lastOrder ? $lastOrder->id + 1 : 1;
+            $orderNumber = str_pad($nextOrderNumber, 6, '0', STR_PAD_LEFT);
 
             $order = Order::create([
                 'user_id' => auth()->id(),
-                'order_number' => Str::uuid(),
+                'order_number' => $orderNumber,
                 'total_price' => $total,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -88,7 +91,7 @@ class OrderController extends Controller
 
         // Очистка корзины на клиенте не требуется здесь, это можно сделать через JS
 
-        return redirect()->route('home')->with('success', 'Ваш заказ успешно оформлен!');
+        return redirect()->route('account.form')->with('success', 'Ваш заказ успешно оформлен!');
     }
 
     /**

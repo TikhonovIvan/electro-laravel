@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -82,11 +84,19 @@ class AuthController extends Controller
 
     public function accountForm()
     {
-        $user = User::query()->find(Auth::id());
+        $user = Auth::user();
+
+        $orders = Order::with('items') // Загрузка связанных товаров
+        ->where('user_id', $user->id)
+            ->latest()
+            ->get();
+
         return view('account', [
             'user' => $user,
+            'orders' => $orders,
         ]);
     }
+
 
     public function accountFormUpdate(Request $request, string $id)
     {
@@ -173,5 +183,16 @@ class AuthController extends Controller
         $user = User::query()->findOrFail($id);
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'Пользователь удален');
+    }
+
+    public function accountFormDelete(string $form)
+    {
+        $order = Order::findOrFail($form);
+
+        // Удалит связанные товары через onDelete('cascade')
+        $order->delete();
+
+        return redirect()->route('account.form')->with('success', 'Заказ успешно удалён.');
+
     }
 }

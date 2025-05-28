@@ -11,4 +11,8 @@ class Order extends Model
         'first_name', 'last_name', 'email', 'address', 'city', 'postal_code', 'phone', 'status'
     ];
 
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

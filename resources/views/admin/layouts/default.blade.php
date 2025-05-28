@@ -209,7 +209,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item"><a href="" class="nav-link">
+                    <li class="nav-item"><a href="{{route('admin.orders.index')}}" class="nav-link">
                             <i class=" nav-icon bi bi-bag-check"></i>
                             <p>Заказы</p>
                         </a>

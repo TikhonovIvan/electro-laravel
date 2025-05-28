@@ -94,7 +94,7 @@
                 <textarea
                     class="input"
                     placeholder="Описание к заказу"
-                    name="desc"
+                    name="desc" required
                 ></textarea>
                 </div>
                 <!-- /Order notes -->
@@ -135,36 +135,21 @@
                 </div>
                 <div class="payment-method">
                     <div class="input-radio">
-                        <input type="radio" name="payment" id="payment-1" />
+                        <input type="radio" name="payment" id="payment-1"  required/>
                         <label for="payment-1">
                             <span></span>
                             Прямой банковский перевод
                         </label>
                         <div class="caption">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua.
+                               Сотрудник свяжется с вами для подтверждения заказа и оплаты
                             </p>
                         </div>
                     </div>
-                    <div class="input-radio">
-                        <input type="radio" name="payment" id="payment-2" />
-                        <label for="payment-2">
-                            <span></span>
-                            Оплата чеком
-                        </label>
-                        <div class="caption">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua.
-                            </p>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="input-checkbox">
-                    <input type="checkbox" id="terms" />
+                    <input type="checkbox" id="terms" name="terms" required/>
                     <label for="terms">
                         <span></span>
                         Я прочитал(а) и принимаю условия
@@ -186,6 +171,7 @@
                             }
                         });
                     });
+
                 </script>
             </form>
         </div>

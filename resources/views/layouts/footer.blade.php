@@ -123,6 +123,12 @@
 
 <script src=" {{ asset('assets/js/main.js') }} "></script>
 
+@if(session('success'))
+    <script>
+        // Очистка корзины только если заказ оформлен
+        localStorage.removeItem('cart');
+    </script>
+    @endif
 
-</body>
-</html>
+    </body>
+    </html>

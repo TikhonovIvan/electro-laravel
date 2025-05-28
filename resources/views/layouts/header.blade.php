@@ -132,10 +132,17 @@
 
                                 <!-- Кнопки управления -->
                                 <div class="cart-btns">
-                                    <a href="{{route('store.cart')}}">Посмотреть корзину</a>
-                                    <a href="{{route('checkout.create')}}">
-                                        Оформить <i class="fa fa-arrow-circle-right"></i>
-                                    </a>
+                                    <a href="{{ route('store.cart') }}">Посмотреть корзину</a>
+
+                                    @auth
+                                        <a href="{{ route('checkout.create') }}">
+                                            Оформить <i class="fa fa-arrow-circle-right"></i>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('login.form') }}">
+                                            Оформить <i class="fa fa-arrow-circle-right"></i>
+                                        </a>
+                                    @endauth
                                 </div>
                             </div>
                         </div>
