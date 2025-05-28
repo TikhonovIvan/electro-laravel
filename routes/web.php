@@ -94,6 +94,9 @@ Route::get('/admin/orders/{id}', [AdminOrderController::class, 'show'])->name('a
 Route::get('/admin/orders/{id}/edit', [AdminOrderController::class, 'edit'])->name('admin.order.edit');
 Route::put('/admin/orders/{order}', [AdminOrderController::class, 'update'])->name('admin.order.update');
 Route::delete('/admin/orders/{id}', [AdminOrderController::class, 'destroy'])->name('admin.order.destroy');
+
+Route::get('/admin/order/{id}/print', [AdminOrderController::class, 'print'])->name('admin.order.print');
+
 /*Заказы клиентов GRUD end*/
 
 

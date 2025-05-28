@@ -86,4 +86,15 @@ class AdminOrderController extends Controller
         $order->delete();
         return redirect()->back()->with('success', 'Заказ успешно удален.');
     }
+
+
+    public function print($id)
+    {
+        $order = Order::with('items')->findOrFail($id);
+
+        return view('admin.order.print', [
+            'order' => $order
+        ]);
+    }
+
 }

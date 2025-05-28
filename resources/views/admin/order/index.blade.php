@@ -70,7 +70,7 @@
                                         <a href="{{ route('admin.order.show', $order->id) }}" class="btn btn-primary">
                                             <i class="bi bi-eye-fill"></i>
                                         </a>
-                                        <a href="" class="btn btn-warning">
+                                        <a href="{{ route('admin.order.print', $order->id) }}" class="btn btn-warning" target="_blank">
                                             <i class="bi bi-printer"></i>
                                         </a>
                                         <form action="{{ route('admin.order.destroy', $order->id) }}" method="post">
