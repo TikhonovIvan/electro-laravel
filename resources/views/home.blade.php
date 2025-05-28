@@ -9,7 +9,6 @@
     {{-- Баннер --}}
     @include('layouts.product-card.baner')
 
-    {{-- Слайдер товаров --}}
-    @include('layouts.product-card.product-card-slide')
+
 
 @endsection

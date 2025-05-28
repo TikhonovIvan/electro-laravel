@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -9,9 +11,29 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('category.index');
+        $query = Product::with(['category', 'images']);
+
+        // Фильтрация по категориям (по slug)
+        if ($request->has('categories') && is_array($request->categories)) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->whereIn('slug', $request->categories);
+            });
+        }
+
+        // Фильтрация по цене
+        if ($request->has('price_min')) {
+            $query->where('price', '>=', $request->price_min);
+        }
+        if ($request->has('price_max')) {
+            $query->where('price', '<=', $request->price_max);
+        }
+
+        $products = $query->paginate(9); // или сколько нужно
+        $categories = Category::all();
+
+        return view('category.index', compact('products', 'categories'));
     }
 
     /**

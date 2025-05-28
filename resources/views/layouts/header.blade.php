@@ -176,7 +176,11 @@
                     <li><a href="{{ route('home') }}">Главная</a></li>
                     <li><a href="{{ route('category.index') }}">Категории</a></li>
                     @foreach($categories as $category)
-                        <li><a href="">{{ $category->name }}</a></li>
+                        <li>
+                            <a href="{{ route('category.index', ['categories[]' => $category->slug]) }}">
+                                {{ $category->name }}
+                            </a>
+                        </li>
                     @endforeach
 
                 </ul>
