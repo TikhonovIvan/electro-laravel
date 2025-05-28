@@ -29,6 +29,10 @@ Route::get('/store-cart', [OrderController::class, 'storeCart'])->name('store.ca
 /*Страница всех категорий*/
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
 
+/*Поиск товара*/
+Route::get('/search', [CategoryController::class, 'search'])->name('search');
+
+
 
 
 

@@ -85,9 +85,9 @@
                 <!-- SEARCH BAR -->
                 <div class="search-bar">
                     <div class="header-search">
-                        <form>
-                            <input class="input" placeholder="Найти товар..."/>
-                            <button class="search-btn">Найти</button>
+                        <form action="{{ route('search') }}" method="GET">
+                            <input class="input" name="query" placeholder="Найти товар..." value="{{ request('query') }}"/>
+                            <button type="submit" class="search-btn">Найти</button>
                         </form>
                     </div>
                 </div>

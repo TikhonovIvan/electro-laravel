@@ -76,6 +76,37 @@ class CategoryController extends Controller
         //
     }
 
+    public function search(Request $request)
+    {
+        $query = trim($request->input('query'));
+
+        if (!$query) {
+            return redirect()->route('category.index');
+        }
+
+        // Поиск по категории (точное совпадение)
+        $category = Category::where('name', 'like', "%{$query}%")->first();
+        if ($category) {
+            return redirect()->route('category.index', ['categories[]' => $category->slug]);
+        }
+
+        // Поиск по товару (частичное совпадение)
+        $product = Product::where('name', 'like', "%{$query}%")->first();
+        if ($product) {
+            return redirect()->route('product.show', $product->id);
+        }
+
+        // Если ничего не найдено — покажем все товары с фильтрацией по названию
+        $products = Product::with(['category', 'images'])
+            ->where('name', 'like', "%{$query}%")
+            ->paginate(9);
+
+        $categories = Category::all();
+
+        return view('category.index', compact('products', 'categories'))
+            ->with('message', 'Результаты поиска по: ' . $query);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
