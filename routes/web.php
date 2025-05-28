@@ -11,6 +11,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
+
 /*Страницы интернет магазина*/
 /*Главная страница*/
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -22,9 +23,6 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
 Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
 
-
-
-
 /*Страница корзины продукта*/
 Route::get('/store-cart', [OrderController::class, 'storeCart'])->name('store.cart');
 
@@ -32,72 +30,90 @@ Route::get('/store-cart', [OrderController::class, 'storeCart'])->name('store.ca
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
 
 
-/*регистрация и авторизация */
-Route::get('/register', [AuthController::class, 'create'])->name('register.create');
-Route::post('/register', [AuthController::class, 'store'])->name('register.store');
-Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
-Route::post('/login', [AuthController::class, 'loginAuth'])->name('login.auth');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-/*регистрация и авторизация End */
 
 
-/*Кабинет пользователей в магазине GRUD */
-Route::get('/account', [AuthController::class, 'accountForm'])->name('account.form');
-Route::put('/account/{id}', [AuthController::class, 'accountFormUpdate'])->name('account.edit.form');
-Route::delete('/account/{form}', [AuthController::class, 'accountFormDelete'])->name('account.delete.form');
-/*Кабинет пользователей в магазине GRUD end*/
+/*======================================================
+ * Не авторизованный пользователь имеет доступ к этим маршрутам
+ ========================================================*/
+Route::middleware('guest')->group(function () {
+    /*регистрация и авторизация */
+    Route::get('/register', [AuthController::class, 'create'])->name('register.create');
+    Route::post('/register', [AuthController::class, 'store'])->name('register.store');
+    Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
+    Route::post('/login', [AuthController::class, 'loginAuth'])->name('login.auth');
+    /*регистрация и авторизация End */
+});
+
+
+Route::middleware('auth')->group(function () {
+    /*Выход из аккаунта*/
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    /*Кабинет пользователей в магазине GRUD */
+    Route::get('/account', [AuthController::class, 'accountForm'])->name('account.form');
+    Route::put('/account/{id}', [AuthController::class, 'accountFormUpdate'])->name('account.edit.form');
+    Route::delete('/account/{form}', [AuthController::class, 'accountFormDelete'])->name('account.delete.form');
+    /*Кабинет пользователей в магазине GRUD end*/
+});
 
 
 
-/*Админка*/
+Route::middleware('admin')->group(function () {
 
-/*главная страница и статистика*/
-Route::get('/admin', [MainController::class, 'index'])->name('admin.main.index');
-
-
-/*Создание категории GRUD*/
-Route::get('/admin/category', [AdminCategoryController::class, 'index'])->name('admin.category.index');
-Route::get('/admin/category/create', [AdminCategoryController::class, 'create'])->name('admin.category.create');
-Route::post('/admin/category/create', [AdminCategoryController::class, 'store'])->name('admin.category.store');
-Route::get('/admin/category/{id}/edit', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
-Route::put('/admin/category/{id}', [AdminCategoryController::class, 'update'])->name('admin.category.update');
-Route::delete('/admin/category/{id}', [AdminCategoryController::class, 'destroy'])->name('admin.category.destroy');
-/*Создание категории GRUD End*/
+    /*Админка*/
+    /*главная страница и статистика*/
+    Route::get('/admin', [MainController::class, 'index'])->name('admin.main.index');
 
 
-/*Пользователи системы кабинет админа GRUD*/
-Route::get('/admin/users', [AuthController::class, 'index'])->name('admin.users.index');
-Route::get('/admin/user/{id}/edit', [AuthController::class, 'edit'])->name('admin.user.edit');
-Route::put('/admin/user/{id}', [AuthController::class, 'update'])->name('admin.user.update');
-Route::delete('/admin/user/{id}', [AuthController::class, 'destroy'])->name('admin.user.destroy');
-/*Пользователи системы кабинет админа GRUD End*/
+    /*Создание категории GRUD*/
+    Route::get('/admin/category', [AdminCategoryController::class, 'index'])->name('admin.category.index');
+    Route::get('/admin/category/create', [AdminCategoryController::class, 'create'])->name('admin.category.create');
+    Route::post('/admin/category/create', [AdminCategoryController::class, 'store'])->name('admin.category.store');
+    Route::get('/admin/category/{id}/edit', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
+    Route::put('/admin/category/{id}', [AdminCategoryController::class, 'update'])->name('admin.category.update');
+    Route::delete('/admin/category/{id}', [AdminCategoryController::class, 'destroy'])->name('admin.category.destroy');
+    /*Создание категории GRUD End*/
 
 
-/*Создание товара Склад GRUD*/
-Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products.index');
-Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
-Route::post('/admin/products/create', [AdminProductController::class, 'store'])->name('admin.products.store');
-Route::get('/admin/products/{id}', [AdminProductController::class, 'show'])->name('admin.products.show');
-Route::get('/admin/products/{id}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
-Route::put('/admin/products/{id}', [AdminProductController::class, 'update'])->name('admin.products.update');
-Route::delete('/admin/product/image/{id}', [AdminProductController::class, 'deleteImage'])->name('admin.product.image.delete');
-
-Route::delete('/admin/products/{id}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
-
-/*Создание товара Склад GRUD end*/
+    /*Пользователи системы кабинет админа GRUD*/
+    Route::get('/admin/users', [AuthController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/user/{id}/edit', [AuthController::class, 'edit'])->name('admin.user.edit');
+    Route::put('/admin/user/{id}', [AuthController::class, 'update'])->name('admin.user.update');
+    Route::delete('/admin/user/{id}', [AuthController::class, 'destroy'])->name('admin.user.destroy');
+    /*Пользователи системы кабинет админа GRUD End*/
 
 
-/*Заказы клиентов GRUD*/
+    /*Создание товара Склад GRUD*/
+    Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products.index');
+    Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
+    Route::post('/admin/products/create', [AdminProductController::class, 'store'])->name('admin.products.store');
+    Route::get('/admin/products/{id}', [AdminProductController::class, 'show'])->name('admin.products.show');
+    Route::get('/admin/products/{id}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+    Route::put('/admin/products/{id}', [AdminProductController::class, 'update'])->name('admin.products.update');
+    Route::delete('/admin/product/image/{id}', [AdminProductController::class, 'deleteImage'])->name('admin.product.image.delete');
 
-Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
-Route::get('/admin/orders/{id}', [AdminOrderController::class, 'show'])->name('admin.order.show');
-Route::get('/admin/orders/{id}/edit', [AdminOrderController::class, 'edit'])->name('admin.order.edit');
-Route::put('/admin/orders/{order}', [AdminOrderController::class, 'update'])->name('admin.order.update');
-Route::delete('/admin/orders/{id}', [AdminOrderController::class, 'destroy'])->name('admin.order.destroy');
+    Route::delete('/admin/products/{id}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
 
-Route::get('/admin/order/{id}/print', [AdminOrderController::class, 'print'])->name('admin.order.print');
+    /*Создание товара Склад GRUD end*/
 
-/*Заказы клиентов GRUD end*/
+
+    /*Заказы клиентов GRUD*/
+
+    Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/admin/orders/{id}', [AdminOrderController::class, 'show'])->name('admin.order.show');
+    Route::get('/admin/orders/{id}/edit', [AdminOrderController::class, 'edit'])->name('admin.order.edit');
+    Route::put('/admin/orders/{order}', [AdminOrderController::class, 'update'])->name('admin.order.update');
+    Route::delete('/admin/orders/{id}', [AdminOrderController::class, 'destroy'])->name('admin.order.destroy');
+
+    Route::get('/admin/order/{id}/print', [AdminOrderController::class, 'print'])->name('admin.order.print');
+
+    /*Заказы клиентов GRUD end*/
+});
+
+
+
+
+
 
 
 

@@ -157,7 +157,7 @@
                             alt="User Image"> <span class="d-none d-md-inline">{{auth()->user()->email}}</span> </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
                         <li class="user-header text-bg-primary"><img
-                                src="{{asset('assets/admin/assets/img/user2-160x160.jpg')}}"
+                                src="https://electro/assets/admin/assets/img/AdminLTELogo.png"
                                 class="rounded-circle shadow" alt="User Image">
                             <p>
                                 {{auth()->user()->email}}
@@ -167,7 +167,7 @@
                         <li class="user-footer"><a href="{{route('account.form')}}" class="btn btn-default btn-flat">Аккаунт</a>
                             <a href="{{route('logout')}}"
                                class="btn btn-default btn-flat float-end">Выйти
-                                out</a></li> <!--end::Menu Footer-->
+                                </a></li> <!--end::Menu Footer-->
                     </ul>
                 </li> <!--end::User Menu Dropdown-->
             </ul> <!--end::End Navbar Links-->

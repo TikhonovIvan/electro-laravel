@@ -92,7 +92,7 @@
 
                             </div>
 
-                            <div class="col-12 mt-5">
+                            <div class="col-12 mt-5 d-none">
                                 <h5>Примечание к заказу</h5>
                                 <div class="d-flex flex-wrap gap-2">
                                     <p></p>

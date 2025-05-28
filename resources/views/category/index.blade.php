@@ -22,7 +22,7 @@
                                             value="{{ $category->slug }}"
                                             {{ in_array($category->slug, request()->input('categories', [])) ? 'checked' : '' }}
                                         />
-                                        <label for="category-{{ $category->id }}">
+                                        <label for="category-{{ $category->id }}" style="font-size: 16px">
                                             <span></span>
                                             {{ $category->name }}
                                             <small>({{ $category->products()->count() }})</small>
@@ -50,11 +50,11 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100 mt-3">Применить фильтр</button>
+                        <button type="submit" class="btn btn-danger w-100 mt-3 fs-4">Применить фильтр</button>
                     </form>
                 </div>
 
-                <div id="store" class="col-md-9">
+                <div id="store" class="col-md-9 ">
                     <div class="wrapper-row-cards">
                         @foreach($products as $product)
                             <div class="product card-info">

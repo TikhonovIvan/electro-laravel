@@ -90,7 +90,7 @@
                 <!-- /Billing Details -->
 
                 <!-- Order notes -->
-                <div class="order-notes">
+                <div class="order-notes d-none">
                 <textarea
                     class="input"
                     placeholder="Описание к заказу"
