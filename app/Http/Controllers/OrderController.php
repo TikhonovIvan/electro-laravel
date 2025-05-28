@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -13,18 +18,13 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $user = User::query()->find(Auth::id());
-        return view('checkout',[
-            'user' => $user
-        ]);
+
     }
 
-    public function storeCart(string $id)
+    public function storeCart()
     {
 
-        return view('store-cart'
-
-        );
+        return view('store-cart');
     }
 
 
@@ -33,72 +33,62 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::query()->find(Auth::id());
+        return view('checkout',[
+            'user' => $user
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+
     public function store(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|email',
             'address' => 'required|string',
             'city' => 'required|string',
             'postal_code' => 'required|string',
             'phone' => 'required|string',
-            'desc' => 'nullable|string',
-            'products' => 'required|array', // массив товаров с количеством и id
-            'products.*.id' => 'required|exists:products,id',
-            'products.*.quantity' => 'required|integer|min:1',
+            'products' => 'required|json',
         ]);
 
-        // Создаем номер заказа
-        $orderNumber = Str::upper(Str::random(10));
+        DB::transaction(function () use ($request) {
+            $cartItems = json_decode($request->products, true);
 
-        // Вычисляем сумму заказа
-        $totalPrice = 0;
+            $total = collect($cartItems)->sum(function ($item) {
+                return $item['price'] * $item['qty'];
+            });
 
-        foreach ($request->products as $item) {
-            $product = Product::findOrFail($item['id']);
-            $priceAfterDiscount = $product->price - $product->discount;
-            $totalPrice += $priceAfterDiscount * $item['quantity'];
-        }
-
-        // Создаем заказ
-        $order = Order::create([
-            'user_id' => auth()->check() ? auth()->id() : null,
-            'order_number' => $orderNumber,
-            'total_price' => $totalPrice,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'address' => $request->address,
-            'city' => $request->city,
-            'postal_code' => $request->postal_code,
-            'phone' => $request->phone,
-            'status' => 'в обработке',
-            // можно добавить поле 'description' если есть в таблице
-        ]);
-
-        // Сохраняем товары заказа
-        foreach ($request->products as $item) {
-            $product = Product::findOrFail($item['id']);
-            $priceAfterDiscount = $product->price - $product->discount;
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $product->id,
-                'product_name' => $product->name,
-                'price' => $priceAfterDiscount,
-                'quantity' => $item['quantity'],
-                'total' => $priceAfterDiscount * $item['quantity'],
+            $order = Order::create([
+                'user_id' => auth()->id(),
+                'order_number' => Str::uuid(),
+                'total_price' => $total,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'address' => $request->address,
+                'city' => $request->city,
+                'postal_code' => $request->postal_code,
+                'phone' => $request->phone,
             ]);
-        }
 
-        // Можно отправить письмо или редирект
-        return redirect()->route('order.thankyou', $order->id)->with('success', 'Заказ успешно оформлен');
+            foreach ($cartItems as $item) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item['id'],
+                    'product_name' => $item['name'],
+                    'price' => $item['price'],
+                    'quantity' => $item['qty'],
+                    'total' => $item['price'] * $item['qty'],
+                ]);
+            }
+        });
+
+        // Очистка корзины на клиенте не требуется здесь, это можно сделать через JS
+
+        return redirect()->route('home')->with('success', 'Ваш заказ успешно оформлен!');
     }
 
     /**

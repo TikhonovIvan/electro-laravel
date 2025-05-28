@@ -118,6 +118,7 @@
     crossorigin="anonymous"
 ></script>
 
+
 <script src=" {{ asset('assets/js/carzin.js') }} "></script>
 
 <script src=" {{ asset('assets/js/main.js') }} "></script>

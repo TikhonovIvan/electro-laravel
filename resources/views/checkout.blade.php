@@ -11,7 +11,9 @@
     <div class="container">
         <!-- row -->
         <div class="row">
-            <form action="" method="post">
+            <form action="{{ route('checkout.store') }}" method="post">
+                @csrf
+
             <div class="col-md-7">
                 <!-- Billing Details -->
                 <div class="billing-details">
@@ -19,13 +21,11 @@
                         <h3 class="title">Адрес для выставления счета</h3>
                     </div>
 
-
-
                     <div class="form-group">
                         <input
                             class="input"
                             type="text"
-                            name="first-name"
+                            name="first_name"
                             placeholder="Имя"
                             value="{{$user->name}}"
                         />
@@ -34,7 +34,7 @@
                         <input
                             class="input"
                             type="text"
-                            name="last-name"
+                            name="last_name"
                             placeholder="Фамилия"
                             value="{{$user->surname}}"
                         />
@@ -86,24 +86,6 @@
                             value="{{$user->phone}}"
                         />
                     </div>
-                    <div class="form-group">
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="create-account" />
-                            <label for="create-account">
-                                <span></span>
-                                Создать аккаунт?
-                            </label>
-                            <div class="caption">
-                                <p>Укажите пароль для регистрации</p>
-                                <input
-                                    class="input"
-                                    type="password"
-                                    name="password"
-                                    placeholder="Пароль"
-                                />
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- /Billing Details -->
 
@@ -118,7 +100,7 @@
                 <!-- /Order notes -->
             </div>
 
-            <!-- Order Details -->
+            <!-- Тут начинается  передача данных с корзины  -->
             <div class="col-md-5 order-details">
                 <div class="section-title text-center">
                     <h3 class="title">Ваш заказ</h3>
@@ -188,10 +170,23 @@
                         Я прочитал(а) и принимаю условия
                     </label>
                 </div>
-                <a href="#" class="primary-btn order-submit">Разместить заказ</a>
+                <input type="hidden" name="products" id="products-json">
+                <button type="submit" class="primary-btn order-submit">Разместить заказ</button>
             </div>
             <!-- /Order Details -->
 
+                <script>
+                    /*Теперь при отправке формы products попадёт в контроллер как JSON-массив.*/
+                    document.querySelectorAll('form').forEach(form => {
+                        form.addEventListener('submit', function(e) {
+                            const productsInput = document.getElementById('products-json');
+                            if (productsInput) {
+                                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                                productsInput.value = JSON.stringify(cart);
+                            }
+                        });
+                    });
+                </script>
             </form>
         </div>
         <!-- /row -->

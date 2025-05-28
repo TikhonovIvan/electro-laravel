@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Обновление таблицы корзины
   function updateCartTable() {
     if (!cartTableBody) return;
-    
+
     cartTableBody.innerHTML = '';
     let totalCartPrice = 0;
 
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalRow = document.createElement('tr');
     totalRow.innerHTML = `
         <td></td>
-          
+
     <td colspan="3" class="text-end mt-4"><strong>Общая сумма: <strong>${totalCartPrice.toLocaleString()} сом</strong></strong></td>
 
       <td></td>
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
       input.addEventListener('change', function() {
         const index = this.dataset.index;
         const newQty = parseInt(this.value);
-        
+
         if (newQty >= 1 && newQty <= 10) {
           cart[index].qty = newQty;
           saveCart();
@@ -190,10 +190,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Обновляем таблицу корзины
     updateCartTable();
-    
+
     // Обновляем блок "Ваш заказ"
     updateCheckoutSummary();
-    
+
     saveCart();
   }
 
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const qty = qtyInput ? parseInt(qtyInput.value) : 1;
 
       const existingIndex = cart.findIndex(item => item.id === id);
-      
+
       if (existingIndex !== -1) {
         cart[existingIndex].qty += qty;
       } else {
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function activateTab(e) {
     e.preventDefault();
-    
+
     tabLinks.forEach(link => {
       link.parentElement.classList.remove('active');
     });
@@ -350,6 +350,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+
+
   // --- Input Number ---
   document.querySelectorAll('.input-number').forEach(el => {
     const input = el.querySelector('input[type="number"]');
@@ -390,4 +392,9 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+
 });
+
+
+

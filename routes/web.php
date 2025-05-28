@@ -17,7 +17,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 /*Страница одного продукта*/
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
-Route::get('/checkout', [OrderController::class, 'index'])->name('checkout.index');
+/*Оформление заказа*/
+Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
+Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
+
+
+
 
 /*Страница корзины продукта*/
 Route::get('/store-cart', [OrderController::class, 'storeCart'])->name('store.cart');

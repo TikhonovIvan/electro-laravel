@@ -111,7 +111,7 @@
                         <div class="dropdown cart-dropdown-wrapper">
                             <a class="dropdown-toggle" href="#">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span>Карзина</span>
+                                <span>Корзина</span>
                                 <div class="qty" id="cart-total-qty">0</div>
                             </a>
 
@@ -133,7 +133,7 @@
                                 <!-- Кнопки управления -->
                                 <div class="cart-btns">
                                     <a href="{{route('store.cart')}}">Посмотреть корзину</a>
-                                    <a href="{{route('checkout.index')}}">
+                                    <a href="{{route('checkout.create')}}">
                                         Оформить <i class="fa fa-arrow-circle-right"></i>
                                     </a>
                                 </div>
