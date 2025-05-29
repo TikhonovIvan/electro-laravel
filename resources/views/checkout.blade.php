@@ -90,13 +90,13 @@
                 <!-- /Billing Details -->
 
                 <!-- Order notes -->
-                <div class="order-notes d-none">
-                <textarea
-                    class="input"
-                    placeholder="Описание к заказу"
-                    name="desc" required
-                ></textarea>
-                </div>
+{{--                <div class="order-notes d-none">--}}
+{{--                <textarea--}}
+{{--                    class="input"--}}
+{{--                    placeholder="Описание к заказу"--}}
+{{--                    name="desc" required--}}
+{{--                ></textarea>--}}
+{{--                </div>--}}
                 <!-- /Order notes -->
             </div>
 
