@@ -577,10 +577,11 @@ textarea.input {
 .dropdown.open > .cart-dropdown {
     opacity: 1;
     visibility: visible;
+
 }
 
 .cart-dropdown .cart-list {
-    max-height: 180px;
+    max-height: 250px;
     overflow-y: scroll;
     margin-bottom: 15px;
 }
@@ -1165,7 +1166,8 @@ textarea.input {
 
 .product-widget .product-body {
     padding-left: 75px;
-    min-height: 60px;
+    min-height: 88px;
+
 }
 
 .product-widget .product-body .product-category {

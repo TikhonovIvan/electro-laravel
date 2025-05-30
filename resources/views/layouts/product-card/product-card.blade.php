@@ -32,6 +32,7 @@
                                             <span class="sale">-{{ $product->discount }}%</span>
                                         </div>
                                     @endif
+
                                 </div>
 
                                 <div class="product-body">
