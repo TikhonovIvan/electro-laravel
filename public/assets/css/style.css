@@ -465,6 +465,8 @@ textarea.input {
 
 }
 
+
+
 /*----------------------------*\
 	Search
 \*----------------------------*/
@@ -923,13 +925,14 @@ textarea.input {
 
 .product .product-img {
     position: relative;
+    height: 200px;
 }
 
 .product .product-img > img {
     width: 100%;
-    height: 220px;
-
-    object-fit: cover;
+    height: 100%;
+    object-fit: scale-down;
+    padding: 5px;
 }
 
 .product .product-img .product-label {
@@ -2493,8 +2496,9 @@ footer {
 /*====================================
 Карточка заказа клиента end
 =======================================*/
-
-
+.card-body-header{
+    height: 0px !important;
+}
 
 
 

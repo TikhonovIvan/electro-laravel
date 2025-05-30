@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <div class="product-img">
             <img src="${item.img}" alt="${item.name}" />
           </div>
-          <div class="product-body">
+          <div class="product-body card-body-header">
             <h3 class="product-name">${item.name}</h3>
             <p class="product-sku">Артикул: ${item.sku || '—'}</p>
             <h4 class="product-price">${item.qty} x ${item.price} сом</h4>

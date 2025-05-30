@@ -90,15 +90,24 @@ class CategoryController extends Controller
             return redirect()->route('category.index', ['categories[]' => $category->slug]);
         }
 
-        // Поиск по товару (частичное совпадение)
-        $product = Product::where('name', 'like', "%{$query}%")->first();
-        if ($product) {
-            return redirect()->route('product.show', $product->id);
+        // Сначала ищем точное совпадение по SKU
+        $productBySku = Product::where('sku', $query)->first();
+        if ($productBySku) {
+            return redirect()->route('product.show', $productBySku->id);
         }
 
-        // Если ничего не найдено — покажем все товары с фильтрацией по названию
+        // Затем ищем частичное совпадение по названию товара
+        $productByName = Product::where('name', 'like', "%{$query}%")->first();
+        if ($productByName) {
+            return redirect()->route('product.show', $productByName->id);
+        }
+
+        // Если ничего не найдено — покажем все товары с фильтрацией по названию или SKU
         $products = Product::with(['category', 'images'])
-            ->where('name', 'like', "%{$query}%")
+            ->where(function($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%")
+                    ->orWhere('sku', 'like', "%{$query}%");
+            })
             ->paginate(9);
 
         $categories = Category::all();
