@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->string('product_name'); // сохраняем название на момент заказа
+            $table->string('sku', 6);                   // Артикул на момент заказа
             $table->decimal('price', 10, 2);
             $table->integer('quantity');
             $table->decimal('total', 10, 2);

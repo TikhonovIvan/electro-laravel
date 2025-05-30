@@ -93,6 +93,7 @@
                                         data-name="{{ $product->name }}"
                                         data-price="{{ $product->price - $product->discount }}"
                                         data-img="{{ $product->images->first() ? asset('uploads/' . $product->images->first()->image_path) : asset('img/no-image.png') }}"
+                                        data-sku="{{ $product->sku }}"
                                     >
                                         <i class="fa fa-shopping-cart"></i> В корзину
                                     </button>

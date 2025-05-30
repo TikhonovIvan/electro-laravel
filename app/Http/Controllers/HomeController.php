@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['category', 'images'])->paginate(1);
+        $products = Product::with(['category', 'images'])->paginate(10);
         $categories = Category::all(); // ← Важно!
 
         return view('home', [

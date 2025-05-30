@@ -34,11 +34,10 @@ class OrderController extends Controller
     public function create()
     {
         $user = User::query()->find(Auth::id());
-        return view('checkout',[
+        return view('checkout', [
             'user' => $user
         ]);
     }
-
 
 
     public function store(Request $request)
@@ -58,8 +57,10 @@ class OrderController extends Controller
             $cartItems = json_decode($request->products, true);
 
             $total = collect($cartItems)->sum(function ($item) {
-                return $item['price'] * $item['qty'];
+                $qty = $item['quantity'] ?? ($item['qty'] ?? 1);
+                return $item['price'] * $qty;
             });
+
             $lastOrder = Order::orderBy('id', 'desc')->lockForUpdate()->first();
             $nextOrderNumber = $lastOrder ? $lastOrder->id + 1 : 1;
             $orderNumber = str_pad($nextOrderNumber, 6, '0', STR_PAD_LEFT);
@@ -82,17 +83,17 @@ class OrderController extends Controller
                     'order_id' => $order->id,
                     'product_id' => $item['id'],
                     'product_name' => $item['name'],
+                    'sku' => $item['sku'] ?? '—', // защита на случай если sku нет
                     'price' => $item['price'],
-                    'quantity' => $item['qty'],
-                    'total' => $item['price'] * $item['qty'],
+                    'quantity' => $item['quantity'] ?? ($item['qty'] ?? 1),
+                    'total' => $item['price'] * ($item['quantity'] ?? ($item['qty'] ?? 1)),
                 ]);
             }
         });
 
-        // Очистка корзины на клиенте не требуется здесь, это можно сделать через JS
-
         return redirect()->route('account.form')->with('success', 'Ваш заказ успешно оформлен!');
     }
+
 
     /**
      * Display the specified resource.

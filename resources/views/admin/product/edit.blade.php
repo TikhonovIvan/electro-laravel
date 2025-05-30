@@ -59,6 +59,12 @@
 
                                 </div>
                                 <div class="col-md-6">
+                                    <label for="validationCustom02" class="form-label">Артикул товара</label>
+                                    <input type="text" name="sku" class="form-control" id="validationCustom02"
+                                           required=""  value="{{ $product->sku }}">
+
+                                </div>
+                                <div class="col-md-6">
                                     <label for="validationCustom02" class="form-label">Цена за штуку</label>
                                     <input type="text" name="price" class="form-control" id="validationCustom02"
                                            required="" value="{{ $product->price }}">
@@ -79,7 +85,7 @@
                                            required=""  value="{{ $product->discount }}">
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 d-none">
                                     <label for="validationCustom04" class="form-label">Цвет товара</label>
                                     <select class="form-select" id="validationCustom04" required name="color">
                                         <option disabled {{ $product->color ? '' : 'selected' }}>Выберите цвет</option>

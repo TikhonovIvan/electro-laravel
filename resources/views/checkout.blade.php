@@ -87,17 +87,8 @@
                         />
                     </div>
                 </div>
-                <!-- /Billing Details -->
 
-                <!-- Order notes -->
-{{--                <div class="order-notes d-none">--}}
-{{--                <textarea--}}
-{{--                    class="input"--}}
-{{--                    placeholder="Описание к заказу"--}}
-{{--                    name="desc" required--}}
-{{--                ></textarea>--}}
-{{--                </div>--}}
-                <!-- /Order notes -->
+
             </div>
 
             <!-- Тут начинается  передача данных с корзины  -->
@@ -157,16 +148,18 @@
                 </div>
                 <input type="hidden" name="products" id="products-json">
                 <button type="submit" class="primary-btn order-submit">Разместить заказ</button>
+
             </div>
             <!-- /Order Details -->
 
                 <script>
-                    /*Теперь при отправке формы products попадёт в контроллер как JSON-массив.*/
                     document.querySelectorAll('form').forEach(form => {
                         form.addEventListener('submit', function(e) {
+                            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                            console.log('Cart data:', cart); // Проверьте в консоли браузера
+
                             const productsInput = document.getElementById('products-json');
                             if (productsInput) {
-                                const cart = JSON.parse(localStorage.getItem('cart')) || [];
                                 productsInput.value = JSON.stringify(cart);
                             }
                         });

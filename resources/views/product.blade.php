@@ -59,11 +59,11 @@
                         {{$product->short_description}}
                     </p>
 
-                    <div class="product-options">
+                    <div class="product-options d-none">
                         <label>
                             Цвет
                             <select class="input-select">
-                                <option value="0">Красный</option>
+                                <option value="color">Красный</option>
                             </select>
                         </label>
                     </div>
@@ -77,21 +77,25 @@
                                 <span class="qty-down">-</span>
                             </div>
                         </div>
+
                         <button
                             class="add-to-cart-btn"
                             data-id="{{ $product->id }}"
                             data-name="{{ $product->name }}"
                             data-price="{{ $product->price - $product->discount }}"
                             data-img="{{ $product->images->first() ? asset('uploads/' . $product->images->first()->image_path) : asset('img/no-image.png') }}"
-
+                            data-sku="{{ $product->sku }}"
                         >
                             <i class="fa fa-shopping-cart"></i> Добавить в корзинку
                         </button>
                     </div>
 
                     <ul class="product-links">
-                        <li>Category:</li>
-                        <li><a href="#">Ноутбуки</a></li>
+                        <li>Категория:</li>
+                        <li><a href="#">{{ $product->category->name }}</a></li>
+
+                        <li>Артикул: {{ $product->sku }} </li>
+
                     </ul>
 
                     <ul class="product-links">
@@ -113,38 +117,41 @@
             </div>
             <!-- /Product details -->
 
-            <!-- Product tab -->
-            <div class="col-md-12">
-                <div id="product-tab">
-                    <!-- product tab nav -->
-                    <ul class="tab-nav">
-                        <li class="active">
-                            <a data-toggle="tab" href="#tab1">Описание</a>
-                        </li>
+            <div class="container">
+                <!-- Product tab -->
+                <div class="col-md-12">
+                    <div id="product-tab">
+                        <!-- product tab nav -->
+                        <ul class="tab-nav">
+                            <li class="active">
+                                <a data-toggle="tab" href="#tab1">Описание</a>
+                            </li>
 
-                    </ul>
-                    <!-- /product tab nav -->
+                        </ul>
+                        <!-- /product tab nav -->
 
-                    <!-- product tab content -->
-                    <div class="tab-content">
-                        <!-- tab1  -->
-                        <div id="tab1" class="tab-pane fade in active">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>
-                                        {!! $product->long_description !!}
-                                    </p>
+                        <!-- product tab content -->
+                        <div class="tab-content">
+                            <!-- tab1  -->
+                            <div id="tab1" class="tab-pane fade in active">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p>
+                                            {!! $product->long_description !!}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- /tab1  -->
+
+
                         </div>
-                        <!-- /tab1  -->
-
-
+                        <!-- /product tab content  -->
                     </div>
-                    <!-- /product tab content  -->
                 </div>
+                <!-- /product tab -->
             </div>
-            <!-- /product tab -->
+
         </div>
         <!-- /row -->
     </div>

@@ -46,6 +46,8 @@
                                         сом
                                         <del class="product-old-price">{{ $product->price }} сом</del>
                                     </h4>
+
+                                    <p class="product-category">Артикул: {{ $product->sku}}</p>
                                 </div>
 
                                 <div class="add-to-cart">
@@ -55,6 +57,7 @@
                                         data-name="{{ $product->name }}"
                                         data-price="{{ $product->price - $product->discount }}"
                                         data-img="{{ $product->images->first() ? asset('uploads/' . $product->images->first()->image_path) : asset('img/no-image.png') }}"
+                                        data-sku="{{ $product->sku }}"
                                     >
                                         <i class="fa fa-shopping-cart"></i> В корзину
                                     </button>

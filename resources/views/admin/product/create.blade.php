@@ -35,13 +35,19 @@
                                 <div class="col-md-6">
                                     <label for="validationCustom01" class="form-label">Название товар</label>
                                     <input type="text" name="name" class="form-control" id="validationCustom01"
-                                           required="">
+                                           required="" value="{{old('name')}}">
 
                                 </div>
                                 <div class="col-md-6">
                                     <label for="validationCustom02" class="form-label">Цена за штуку</label>
-                                    <input type="text" name="price" class="form-control" id="validationCustom02"
-                                           required="">
+                                    <input type="number" name="price" class="form-control" id="validationCustom02"
+                                           required=""  value="{{old('price')}}">
+
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="validationCustom02" class="form-label">Артикул товара</label>
+                                    <input type="text" name="sku" class="form-control" id="validationCustom02"
+                                           required="" value="{{old('sku')}}">
 
                                 </div>
                                 <div class="col-md-6"><label for="validationCustomUsername" class="form-label">Краткое
@@ -49,27 +55,28 @@
                                     <div class="input-group has-validation">
                                         <input type="text" name="short_description" class="form-control"
                                                id="validationCustomUsername" aria-describedby="inputGroupPrepend"
-                                               required="">
+                                               required="" value="{{old('short_description')}}" >
 
                                     </div>
                                 </div> <!--end::Col--> <!--begin::Col-->
                                 <div class="col-md-6">
                                     <label for="validationCustom03" class="form-label">Скидка товара</label>
-                                    <input type="text" name="discount" class="form-control" id="validationCustom03"
-                                           required="">
+                                    <input type="number" name="discount" class="form-control" id="validationCustom03"
+                                           required="" value="{{old('discount')}}">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 d-none">
                                     <label for="validationCustom04" class="form-label">Цвет товара</label>
-                                    <select class="form-select" id="validationCustom04" required="" name="color">
-                                        <option selected="" disabled=""  >Выберите цвет</option>
-                                        <option value="Красный">Красный</option>
+                                    <input value=" ">
+                                    <select class="form-select" id="validationCustom04" required="" name="color" >
+{{--                                        <option selected="" disabled=""  >Выберите цвет</option>--}}
+                                        <option value="Красный" selected>Красный</option>
                                     </select>
 
                                 </div>
                                 <div class="col-md-6">
                                     <label for="validationCustom05" class="form-label">Кол-во на складе</label>
                                     <input type="number" name="stock" class="form-control" id="validationCustom05"
-                                           required="">
+                                           required="" value="{{old('stock')}}">
 
                                 </div>
                                 <div class="col-md-6">
@@ -97,7 +104,7 @@
                                     </style>
                                 <div class="col-md-8">
                                     <label for="content" class="form-label">Описание продукта</label>
-                                    <textarea class="form-control ckeditor" name="long_description" id="content" cols="30" rows="10"></textarea>
+                                    <textarea class="form-control ckeditor" name="long_description" id="content" cols="30" rows="10">{{old('long_description')}}"</textarea>
 
                                 </div>
 

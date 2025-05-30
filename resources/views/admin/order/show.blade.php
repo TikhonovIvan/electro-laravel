@@ -78,11 +78,13 @@
                                 <table class="table table-bordered">
                                     <tr>
                                         <th>Список товаров</th>
+                                        <th>Артикул товара</th>
                                         <td>Количество шт.</td>
                                     </tr>
                                     @foreach($order->items as $item)
                                         <tr>
                                             <td>{{ $item->product_name }}</td>
+                                            <td>{{ $item->sku }}</td>
                                             <td>{{ $item->quantity }} шт</td>
                                         </tr>
                                     @endforeach

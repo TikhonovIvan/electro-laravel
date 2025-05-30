@@ -20,7 +20,9 @@ return new class extends Migration
             $table->text('long_description');               // Длинное описание
             $table->string('color');                        // Цвет
             $table->unsignedInteger('stock');               // Кол-во на складе
+            $table->string('sku', 6)->unique();                //Артику
             $table->foreignId('category_id')                // Категория
+
             ->constrained('categories')
                 ->onDelete('cascade');
             $table->timestamps();

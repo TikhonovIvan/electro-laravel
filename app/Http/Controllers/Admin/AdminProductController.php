@@ -43,6 +43,7 @@ class AdminProductController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required'],
+            'sku' => ['required', 'digits:6', 'unique:products,sku'],
             'price' => ['required', 'numeric'],
             'discount' => ['nullable', 'numeric'],
             'short_description' => ['required'],
@@ -121,6 +122,7 @@ class AdminProductController extends Controller
 
         $validated = $request->validate([
             'name' => ['required'],
+            'sku' => ['required'],
             'price' => ['required', 'numeric'],
             'discount' => ['nullable', 'numeric'],
             'short_description' => ['required'],

@@ -32,6 +32,7 @@
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th>Название</th>
+                                <th>Артикул</th>
                                 <th>Описание</th>
                                 <th>Цена</th>
                                 <th>Скидка</th>
@@ -48,6 +49,7 @@
                                 <tr class="align-middle">
                                     <td>{{$product->id}}</td>
                                     <td>{{$product->name}}</td>
+                                    <td>{{$product->sku}}</td>
                                     <td>{{$product->short_description}}</td>
                                     <td>{{$product->price}}</td>
                                     <td>{{$product->discount}}</td>

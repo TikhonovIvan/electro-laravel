@@ -48,6 +48,10 @@
                                         <td>{{ $product->name }}</td>
                                     </tr>
                                     <tr>
+                                        <th>Артикул товара</th>
+                                        <td>{{ $product->sku }}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Цена</th>
                                         <td>{{ $product->price }} сом</td>
                                     </tr>

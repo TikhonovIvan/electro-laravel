@@ -15,6 +15,7 @@ class Product extends Model
         'long_description',
         'color',
         'stock',
+        'sku',
         'category_id'
     ];
 
