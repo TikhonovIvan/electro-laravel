@@ -90,9 +90,9 @@
               <span class="copyright">
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 Copyright &copy;
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
+
+                  <?= date('Y')?>
+
                 Все права защищены
               </span>
                 </div>

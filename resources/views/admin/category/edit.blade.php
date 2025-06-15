@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-warning">Создать</button>
+                                <button type="submit" class="btn btn-warning">Редактировать</button>
 
                             </div>
                         </form>

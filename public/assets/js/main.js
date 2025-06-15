@@ -340,10 +340,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (priceSlider && typeof noUiSlider !== 'undefined') {
         noUiSlider.create(priceSlider, {
-            start: [100, 30000],
+            start: [1, 300000],
             connect: true,
             step: 1,
-            range: { min: 100, max: 30000 }
+            range: { min: 1, max: 300000 }
         });
 
         priceSlider.noUiSlider.on('update', function (values, handle) {
